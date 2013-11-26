@@ -4,6 +4,7 @@
 #include<stdio.h>
 #include<string.h>
 #include <stdlib.h>
+#include"to_int.h"
 
 main(int argc, char* argv[])
 {
@@ -12,7 +13,8 @@ main(int argc, char* argv[])
                 exit(1);
         }
 	
-	//Extract the numbers from the date
+	//Extract the year,monthe,day components from the date
+
 	char yi[5],yf[5],mi[3],mf[3],di[3],df[3];	//size+1 for null character at the end
 	
 	strncpy (yi, argv[1], 4);
@@ -30,55 +32,55 @@ main(int argc, char* argv[])
 	
 	printf("%s %s %s %s %s %s\n",yi,mi,di,yf,mf,df);
 
+	//Make a structure for the date
+	
+	struct date
+	{
+		int year;
+		int month;
+		int day;
+	}d1,d2;
 
-	//Now the date part
+
+	//Convert the string date components to int and assign them to the structure elements
+
+	d1.year=to_int(yi);
+        d1.month=to_int(mi);
+        d1.day=to_int(di);
+        d2.year=to_int(yf);
+        d2.month=to_int(mf);
+	d2.day=to_int(df);
+
+        printf("%d %d %d %d %d %d\n",d1.year,d1.month,d1.day,d2.year,d2.month,d2.day);
+
+
+        //store difference b/w the date elements
+        int dy=d2.day-d1.day;
+        int dm=d2.month-d1.month;
+        int dd=d2.day-d1.day;
+
+
+	//*Now the date part
 
 
 	//int flag=0;	//to check for wrong dates
-	int y=0,m=0,d=0;	//to store the date
+	int d=0;	//to store the output, ie difference in days
 
-	if(strcmp(yi,yf))	//Calculate the difference in years
+
+	//Procedure :find diff in year -> find diff in month -> find diff in days
+
+	//diff in year: find diff in year -> diff in month -> diff in days
+	//diff in months -> find diff in months -> diff in days	
+	//diff in days -> find diff in days	
+
+	if(!dy)	//Year same
 	{
-		y=strcmp(yf,yi);
-		printf("%d",y);
-		
-		month(mf,mi);	//Now Check difference in months
+		//diff_month(d2.month,d1.month);	//Check difference in months
 	}
-	
-	else 		//Year same, check month
+	else 		//There is Difference in Years
 	{
-		if(strcmp(mf,mi))
-		{
-			month(mf,mi);	//Calculate the difference in months
-
-			day(df,di);
-			//if(strcmp(mf,mi)) //Calculate the difference in months
-			//{
-			//	m=strcmp(mf,mi);
-                	//	printf(" %d",m);
-
-			//	goto day;     //Now Check difference in days
-			//}
-			
-			else	//Month same, check day
-			{
-				day:
-					if(strcmp(df,di)) //Calculate the difference in days
-                        		{
-                                		d=strcmp(mf,mi);
-                                		printf(" %d",d);
-					}
-					
-					else	//Update on same day
-					{
-						printf("You have updated today!\n");
-						exit(0);
-					}
-
-
-                        }
-
-			
+		//diff_year(d2.year,d1.year);		//Check difference
+		
 	}
 
 
