@@ -19,6 +19,12 @@ struct date
 //Make a macro for checking leap year
 #define is_leap(year) (((year%4==0) && (year%100)!=0)||(year%400)==0)
 
+//Make a macro for checking elapsed days
+#define check_elapsed_days(days) (days)
+
+//Protoypes for functions
+void diff_month(int,int,int); 
+
 void main(int argc, char* argv[])
 {
         if(argc != 3 ) {
@@ -82,12 +88,13 @@ void main(int argc, char* argv[])
 		}
 		else
 		{
-			//diff_month();
+			diff_month(d1.year,d1.month,d2.month);
 		}
 	}
 	else 		//There is Difference in Years
 	{
 		//diff_year();		//Check difference
+		diff_month(d1.year,d1.month,d2.month);
 		
 	}
 
@@ -97,10 +104,10 @@ void main(int argc, char* argv[])
 
 int check_days(int year,int month)	//find the no of days in a month
 {
-	int leap=is_leap(year);
-	//if(((year%4==0) && (year%100)!=0)||(year%400)==0)
-	//	leap=1;
+	int leap=is_leap(year);		//check if its leap year
 	
+	//printf("Month = %d\n",month);
+
 	switch(month)
 	{
 		case 1:case 3: case 5:case 7: case 8: case 10: case 12:
@@ -114,10 +121,68 @@ int check_days(int year,int month)	//find the no of days in a month
 			return 29;
 		else
 			return 28;
+
+		default: return 0;
 	}
 }
 
-void diff_month()
+int check_remaining_days(int month,int day)
 {
+	int days_in_month=check_days(d1.year,month);
+	//printf("Days in month = %d\n",days_in_month);
+	return(days_in_month-day);
+}
 
-}	
+void diff_month(int yr,int mi,int mf)
+{
+	
+	d=d+check_remaining_days(mi,d1.day);	//Add the days in current month
+	printf("initial date = %d %d %d\n",d1.year,d1.month,d1.day);
+	printf("final date = %d %d %d\n",d2.year,d2.month,d2.day);
+	printf("remaining days in month = %d\n",d);
+	printf("final month = %d\n",mf);
+
+	if(mf>mi)
+	{
+		mi=mi+1;	//Increment the month as days in current month have been added
+
+		while(mi<mf)
+		{
+			d=d+check_days(yr,mi);	//add the days of the month
+			mi=mi+1;	//now increment to check for next month
+		}
+
+	}
+	else	
+	{
+		//there is difference of years, as initial month > final month
+		//first the difference in years is calculated and added to the difference,
+		//till there is only 1 year gap b/w the years
+
+		//Check if current month is december
+		if(mi==12)
+		{
+			//Start from the next year
+
+			//Check if final month is 1,ie, January
+			if(mf==1)
+			{
+				//Do nothing, as the days in last month are added(in the end of this function)
+			}
+			else
+			{	
+				//Add the days from the months from 1 till final month
+				mi=1;	//Start from 1, ie,January
+				while(mi<mf)
+				{
+					d=d+check_days(yr,mi);	//add the days of the month
+					mi=mi+1;	//now increment to check for next month
+				}
+			}
+		}
+	}
+
+	d=d+check_elapsed_days(d2.day);	//add the days from the final month
+
+}
+
