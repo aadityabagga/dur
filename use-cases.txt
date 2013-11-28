@@ -1,3 +1,8 @@
+#Use cases for dur.c
+#Developed by Aaditya Bagga
+
+Some places where dur can be used-
+
 1.)To find the last upgrade time with pacman.
 
 A bash function for it-
