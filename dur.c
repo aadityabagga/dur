@@ -125,7 +125,7 @@ int main(int argc, char* argv[])
 
 	//Print the output
 	printf(" %d day(s)\n",d);
-	exit(0);
+	return 0;
 
 }
 
