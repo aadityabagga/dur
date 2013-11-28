@@ -17,10 +17,11 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
-#include"to_int.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include "to_int.h"
+#include <math.h>
 
 int d=0;        //to store the output,ie, difference in days
 
@@ -42,7 +43,7 @@ struct date
 void check_months(int,int,int,int,int); 
 void diff_years(int,int);
 
-void main(int argc, char* argv[])
+int main(int argc, char* argv[])
 {
         if(argc != 3 ) {
                 printf("Invalid number of arguments\n");
@@ -123,7 +124,9 @@ void main(int argc, char* argv[])
 		}
 	}
 
+	//Print the output
 	printf(" %d day(s)\n",d);
+	exit(EXIT_SUCCESS);
 
 }
 
@@ -161,8 +164,8 @@ void check_months(int yr,int mi,int mf,int di,int df)
 	//This function has been made in such a way that mf>=mi, if the opposite is true, display a message to the effect.
 	if(mi>mf)
 	{
-		printf("Did you enter the date correctly? Its like first earlier date, then later date\n");
-		return;
+		printf("Did you enter the date correctly? Its like first earlier date, then later date.\n");
+		exit(EXIT_FAILURE);
 	}
 
 	if(mf!=1)	//if mf=1,ie,final month is january, then the days calculated as days in current month which is done at the end
