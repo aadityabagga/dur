@@ -125,7 +125,7 @@ int main(int argc, char* argv[])
 
 	//Print the output
 	printf(" %d day(s)\n",d);
-	exit(EXIT_SUCCESS);
+	exit(0);
 
 }
 
@@ -164,7 +164,7 @@ void check_months(int yr,int mi,int mf,int di,int df)
 	if(mi>mf)
 	{
 		printf("Did you enter the date correctly? Its like first earlier date, then later date.\n");
-		exit(EXIT_FAILURE);
+		exit(1);
 	}
 
 	if(mf!=1)	//if mf=1,ie,final month is january, then the days calculated as days in current month which is done at the end
