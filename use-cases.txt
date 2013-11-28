@@ -3,19 +3,37 @@
 
 Some places where dur can be used-
 
-1.)To find the last upgrade time with pacman.
+1.)To find the last upgrade time
+
+a)To find the last upgrade time with pacman.
 
 A bash function for it-
 
 function lastupt()
+
 {
-        updated=`grep upgraded /var/log/pacman.log |tac|head -n 1|cut -c 2-11`
+        updated=` upgraded /var/log/pacman.log |tac|head -n 1|cut -c 2-11`
         today=`date +%F`
         echo "Last update was`dur $updated $today` ago"
 }
 
 This can be added to ~/.bashrc and called with $ lastup
 (dur, the compiled C program, has been copied to /usr/bin)
+
+b)To find the last upgrade time with slackpkg.
+
+A bash function for it-
+
+function lastupt()
+{
+	updated=`date --date=@$(cat /var/lib/slackpkg/LASTUPDATE) +%F`
+	today=`date +%F`
+        echo "Last update was`dur $updated $today` ago"
+}
+
+This can be added to ~/.bashrc and called with $ lastup
+(dur, the compiled C program, has been copied to /usr/bin)
+
 
 2.)As a reminder manager.
 
