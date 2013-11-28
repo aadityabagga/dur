@@ -8,7 +8,8 @@
   the Free Software Foundation, either version 3 of the License, or
   any later version.
 
-  This program is distributed WITHOUT ANY WARRANTY; without even the implied warranty of
+  This program is distributed WITHOUT ANY WARRANTY;
+  without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
   See the GNU General Public License for more details.
 
@@ -38,7 +39,7 @@ struct date
 #define check_elapsed_days(days) (days)
 
 //Protoypes for functions
-void diff_months(int,int,int,int,int); 
+void check_months(int,int,int,int,int); 
 void diff_years(int,int);
 
 void main(int argc, char* argv[])
@@ -92,7 +93,6 @@ void main(int argc, char* argv[])
 
 	//diff in year: find diff in year -> diff in month -> diff in days
 	//diff in months -> find diff in months -> diff in days	
-	//diff in days -> find diff in days	
 
 	if(dy==0)	//Year same
 	{
@@ -104,7 +104,7 @@ void main(int argc, char* argv[])
 		}
 		else
 		{
-			diff_months(d1.year,d1.month,d2.month,d1.day,d2.day);
+			check_months(d1.year,d1.month,d2.month,d1.day,d2.day);
 		}
 	}
 	else 		//There is Difference in Years
@@ -113,20 +113,9 @@ void main(int argc, char* argv[])
 		if(dy==1)
 		{
 			//Only diff in months need to be checked
-
-			//if(dm>=0)
-			//{
-				//Go from current month to end of year
-				diff_months(d1.year,d1.month,12,d1.day,31);
-				
-				//Now go from start of year to end of month
-				diff_months(d2.year,1,d2.month,1,d2.day);	//0 has been used to compensate the 1 day diff arising out of 2 runs of the diff_months function
-			//}
-			//else
-			//{
-			//Check difference in months
-			//	diff_months(d2.year,d1.month,d2.month,d1.day,d2.day);	//This case is handled directly by the diff_months function
-			//}
+			
+				check_months(d1.year,d1.month,12,d1.day,31);
+				check_months(d2.year,1,d2.month,0,d2.day);	//0 is used as initial day to compensate for the day being lost due to 2 function calls to check_months
 		}
 		else
 		{
@@ -142,8 +131,6 @@ int check_days(int year,int month)	//find the no of days in a month
 {
 	int leap=is_leap(year);		//check if its leap year
 	
-	//printf("Month = %d\n",month);
-
 	switch(month)
 	{
 		case 1:case 3: case 5:case 7: case 8: case 10: case 12:
@@ -162,75 +149,40 @@ int check_days(int year,int month)	//find the no of days in a month
 	}
 }
 
-int check_remaining_days(int month,int day)
+int check_remaining_days(int year,int month,int day)
 {
-	int days_in_month=check_days(d1.year,month);
-	//printf("Days in month = %d\n",days_in_month);
+	int days_in_month=check_days(year,month);
+	
 	return(days_in_month-day);
 }
 
-void diff_months(int yr,int mi,int mf,int di,int df)
+void check_months(int yr,int mi,int mf,int di,int df)
 {
+	if(mf!=1)	//if mf=1,ie,final month is january, then the days calculated as days in current month which is done at the end	
+		d=d+check_remaining_days(yr,mi,di);	//Add the days in current month
 	
-	d=d+check_remaining_days(mi,di);	//Add the days in current month
-	//printf("initial date = %d %d %d\n",d1.year,d1.month,d1.day);
-	//printf("final date = %d %d %d\n",d2.year,d2.month,d2.day);
-	//printf("remaining days in month = %d\n",d);
-	//printf("final month = %d\n",mf);
+	//Days in current month added, move on to the next months
 
-	if(mf>mi)
+	mi=mi+1;	//Increment the month as days in current month have been added
+
+	while(mi<mf)
 	{
-		mi=mi+1;	//Increment the month as days in current month have been added
-
-		while(mi<mf)
-		{
-			d=d+check_days(yr,mi);	//add the days of the month
-			mi=mi+1;	//now increment to check for next month
-		}
-
-	}
-	else	
-	{
-		//there is difference of years, as initial month > final month
-		//first the difference in years is calculated and added to the difference,
-		//till there is only 1 year gap b/w the years
-
-		//Check if current month is december
-		if(mi==12)
-		{
-			//Start from the next year
-
-			//Check if final month is 1,ie, January
-			if(mf==1)
-			{
-				//Do nothing, as the days in last month are added(in the end of this function)
-			}
-			else
-			{	
-				//Add the days from the months from 1 till final month
-				mi=1;	//Start from 1, ie,January
-				while(mi<mf)
-				{
-					d=d+check_days(yr,mi);	//add the days of the month
-					mi=mi+1;	//now increment to check for next month
-				}
-			}
-		}
+		d=d+check_days(yr,mi);	//add the days of the month
+		mi=mi+1;	//now increment to check for next month
 	}
 
-	d=d+check_elapsed_days(df);	//add the days from the final month
+	//Days in in-between months added; now add days in final month
+
+	if(mi!=13)	//In this case initial month was 12,ie,december,and the days are calculated at the top as remaining days
+		d=d+check_elapsed_days(df);	//add the days from the final month
 }
 
 void diff_years(int yi,int yf)
 {
-	//printf("Initial year = %d\n",yi);
-	//printf("Final year = %d\n",yf);
-	
 	int dy=yf-yi;	//Difference in years
 	
 	while(dy>1)
 	{
-		//printf("%d:%d ",yi+1,is_leap((yi+1)));
 		if (is_leap((yi+1)))	//Check if next year is leap or not
 			d=d+366;	//Add the no of days in the year
 		else
@@ -241,8 +193,8 @@ void diff_years(int yi,int yf)
 	}
 	//done with the difference in years
 
-	//printf("Difference till now = %d\n",d);
-	
 	//now need to check the difference b/w months
-	diff_months(yi,d1.month,d2.month,d1.day,d2.day);
+	
+		check_months(yi,d1.month,12,d1.day,31);
+		check_months(yf,1,d2.month,0,d2.day);	//0 is used as initial day to compensate for the day being lost due to 2 function calls to check_months
 }
