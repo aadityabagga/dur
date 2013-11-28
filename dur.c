@@ -158,7 +158,14 @@ int check_remaining_days(int year,int month,int day)
 
 void check_months(int yr,int mi,int mf,int di,int df)
 {
-	if(mf!=1)	//if mf=1,ie,final month is january, then the days calculated as days in current month which is done at the end	
+	//This function has been made in such a way that mf>=mi, if the opposite is true, display a message to the effect.
+	if(mi>mf)
+	{
+		printf("Did you enter the date correctly? Its like first earlier date, then later date\n");
+		return;
+	}
+
+	if(mf!=1)	//if mf=1,ie,final month is january, then the days calculated as days in current month which is done at the end
 		d=d+check_remaining_days(yr,mi,di);	//Add the days in current month
 	
 	//Days in current month added, move on to the next months
