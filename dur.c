@@ -167,8 +167,14 @@ void check_months(int yr,int mi,int mf,int di,int df)
 		exit(1);
 	}
 
-	if(mf!=1)	//if mf=1,ie,final month is january, then the days calculated as days in current month which is done at the end
+	if(mf==1)
+	{
+		//if mf=1,ie,final month is january, then the days calculated as days in current month which is done at the end
+	}
+	else
+	{
 		d=d+check_remaining_days(yr,mi,di);	//Add the days in current month
+	}
 	
 	//Days in current month added, move on to the next months
 
@@ -182,8 +188,14 @@ void check_months(int yr,int mi,int mf,int di,int df)
 
 	//Days in in-between months added; now add days in final month
 
-	if(mi!=13)	//In this case initial month was 12,ie,december,and the days are calculated at the top as remaining days
+	if(mi==13)
+	{
+		//In this case initial month was 12,ie,december,and the days are calculated at the top as remaining days
+	}
+	else
+	{
 		d=d+check_elapsed_days(df);	//add the days from the final month
+	}
 }
 
 void diff_years(int yi,int yf)
