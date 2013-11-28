@@ -1,0 +1,45 @@
+Some places where dur can be used-
+
+1.)To find the last upgrade time with pacman.
+
+A bash function for it-
+
+function lastupt()
+{
+        updated=`grep upgraded /var/log/pacman.log |tac|head -n 1|cut -c 2-11`
+        today=`date +%F`
+        echo "Last update was`dur $updated $today` ago"
+}
+
+This can be added to ~/.bashrc and called with $ lastup
+
+
+2.)As a reminder manager.
+
+a)A script for it-
+
+#!/bin/bash
+#A script to act as a reminder
+
+	eventname="Exam"        
+	eventdate="2013-12-08"
+	today=`date +%F`
+	
+	echo "$eventname is`dur $today $eventdate` away"
+	read	#To wait for the user to close it.
+	exit 0
+
+The eventname and eventdate can be modified.
+The above script can be added to autostart, so that the reminder is displayed at every boot.
+
+for eg, I have added this the following in my autostart
+	 xterm -e "/home/aaditya/scripts/remind"
+
+b)To be displayed as a Conky element
+
+I have the following in my ~/.conkyrc
+	${font Cantarell:size=12}Exam: $alignr ${execi 3600 dur `date +%F` 2013-12-08}
+
+Here Exam is the name of the event, and 2013-12-08 is the date of the event, ie exam.
+This updates itself every hour, or 3600 seconds.
+
