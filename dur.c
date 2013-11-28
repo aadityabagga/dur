@@ -21,7 +21,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include "to_int.h"
-#include <math.h>
 
 int d=0;        //to store the output,ie, difference in days
 
