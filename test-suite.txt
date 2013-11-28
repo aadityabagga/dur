@@ -1,0 +1,110 @@
+#Test cases for dur.c
+#Designed by Aaditya Bagga
+
+: '
+Terms-
+di=initial date,composed of-
+	yi=initial year
+	mi=initial month
+	di=initial day(date)
+df=final date
+	yi=final year
+	mi=final month
+	di=final day(date)
+'
+
+##Cases-
+#1) yf=yi,mf=mi,df=di
+ ./dur 2013-12-30 2013-12-30
+# 0 day(s)
+
+
+#2) yf=yi,mf=mi,df>di
+ ./dur 2013-12-30 2013-12-31
+# 1 day(s)
+
+
+#3) yf=yi,mf>mi,df=di
+ ./dur 2013-11-30 2013-12-30 
+# 30 day(s)
+#	a) yf=yi,mf>mi,df=di (feb)
+		./dur 2013-02-28 2013-03-28
+#		 28 day(s)
+#	b) yf=yi,mf>mi,df=di (feb, leap year)
+		./dur 2016-02-28 2016-03-28
+#		 29 day(s)
+#	c) yf=yi,mf>mi,df=di (initial month of 31 days)
+		./dur 2013-08-30 2013-09-30 
+#		 31 day(s)
+
+#mf<mi is not valid for yf=yi
+
+
+#4) yf>yi,mf=mi,df=di
+ ./dur 2013-08-30 2014-08-30
+# 365 day(s)
+#	a) yf>yi,mf=mi,df=di (leap year)
+		./dur 2016-08-30 2017-08-30
+#		 365 day(s)
+#	a) yf>yi,mf=mi,df=di (leap year, feb in between)
+		./dur 2016-01-30 2017-01-30
+#		 366 day(s)
+#	c) yf>yi,mf=mi,df=di (mf=m1=1, ie January :special case)
+		./dur 2013-01-28 2014-01-28 
+#		 365 day(s)
+#	d) yf>yi,mf=mi,df=di (mf=m1=1, ie December :special case)
+		./dur 2013-01-28 2014-01-28 
+#		 365 day(s)
+
+
+#5.) yf>yi,mf>mi,df=di
+ ./dur 2013-08-30 2014-09-30
+# 396 day(s)
+#	a) yf>yi,mf>mi,df=di (yi is leap)
+		./dur 2016-08-30 2017-09-30
+#		 396 day(s)
+#	b) yf>yi,mf>mi,df=di (yi is leap, feb in between)
+		./dur 2016-01-30 2017-02-30
+#		 397 day(s)
+
+
+#5.) yf>yi,mf>mi,df>di
+ ./dur 2013-07-30 2014-08-31
+# 396 day(s)
+#	a) yf>yi,mf>mi,df>di (leap year,feb in between)
+		 ./dur 2015-02-28 2016-02-29
+		# 366 day(s)
+
+
+#6.) yf>yi,mf<mi,df<di
+./dur 2015-12-31 2016-01-01
+# 1 day(s)
+#	b) yf>yi,mf<mi,df=di
+		./dur 2015-12-31 2016-01-31
+#		 31 day(s)
+#	c) yf>yi,mf<mi,df>di
+		./dur 2015-12-01 2016-01-02
+#		 32 day(s)
+
+
+#7) yf-yi>1
+echo "--------------------------------"
+./dur 2015-12-01 2017-01-01
+# 397 day(s)
+./dur 2015-12-01 2016-12-01
+# 366 day(s)
+./dur 2016-12-01 2017-01-01
+# 31 day(s)
+/home/aaditya/scripts/calc add 366 31
+#Result: 397
+echo "--------------------------------"
+./dur 2013-07-30 2016-07-30
+# 1096 day(s)
+./dur 2013-07-30 2015-07-30
+# 730 day(s)
+./dur 2015-07-30 2016-07-30
+# 366 day(s)
+/home/aaditya/scripts/calc add 730 366
+#Result: 1096
+echo "--------------------------------"
+
