@@ -91,8 +91,8 @@ int main(int argc, char* argv[])
 
 	//Procedure:find diff in year -> find diff in month -> find diff in days
 
-	//diff in year: find diff in year -> diff in month -> diff in days
-	//diff in months -> find diff in months -> diff in days	
+	//diff in years: find diff in year -> diff in month -> diff in days
+	//diff in months -> find diff in months -> diff in days
 
 	if(dy==0)	//Year same
 	{
@@ -113,9 +113,11 @@ int main(int argc, char* argv[])
 		if(dy==1)
 		{
 			//Only diff in months need to be checked
-			
-				check_months(d1.year,d1.month,12,d1.day,31);
-				check_months(d2.year,1,d2.month,0,d2.day);	//0 is used as initial day to compensate for the day being lost due to 2 function calls to check_months
+
+			//When there is difference in year(s), the diff in months(and days) is divided into 2 parts: from the initial date to the end of initial year, and then from the start of the final year to the final date.
+
+			check_months(d1.year,d1.month,12,d1.day,31);
+			check_months(d2.year,1,d2.month,0,d2.day);	//0 is used as initial day to compensate for the day being lost due to 2 function calls to check_months
 		}
 		else
 		{
