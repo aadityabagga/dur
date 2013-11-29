@@ -57,10 +57,8 @@ int main(int argc, char* argv[])
 	char *mf;
 	char *di;
 	char *df;
-	/*size+1 for null character at the end*/
-	
 
-	/*Copy content of argv[1] from index values 0 to 3(inclusive)*/
+	/*Copy content of argv[1] and argv[2] from specified index values(inclusive)*/
 
 	yi=copy(*(argv+1),0,3);	
 	mi=copy(*(argv+1),5,6);
@@ -69,7 +67,6 @@ int main(int argc, char* argv[])
 	yf=copy(*(argv+2),0,3);
         mf=copy(*(argv+2),5,6);
         df=copy(*(argv+2),8,9);
-
 
 	/*Error checking for the input string*/
 
@@ -88,7 +85,6 @@ int main(int argc, char* argv[])
         mf[2]='\0';
 	df[2]='\0';
 
-	
 	/*Convert the string date components to int and assign them to the structure elements*/
 
 	d1.year=to_int(yi);
@@ -97,7 +93,6 @@ int main(int argc, char* argv[])
         d2.year=to_int(yf);
         d2.month=to_int(mf);
 	d2.day=to_int(df);
-
         
 	/*store difference b/w the date elements*/
         int dy,dm,dd;
@@ -110,7 +105,6 @@ int main(int argc, char* argv[])
 
 
 	/*int flag=0;	*to check for wrong dates: currently the program is non-interactive so its not being implemented yet*/
-
 
 	/*Procedure:find diff in year -> find diff in month -> find diff in days
 
