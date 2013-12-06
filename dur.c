@@ -66,7 +66,7 @@ int main(int argc, char* argv[])
 		{
 			char c1=*(argv[1]+i);
 			char c2=*(argv[2]+i);
-			if((c1<48||c1>57)||(c2<48||c2>57))	/*Character is not an integer*/
+			if((c1<48||c1>57)||(c2<48||c2>57))	/*Character is not an integer: invalid input*/
 			{
 				flag=1;
 			}
@@ -120,27 +120,25 @@ int main(int argc, char* argv[])
         dd=d2.day-d1.day;
 
 
-	/*Now the date part*/
-
-	
 	/*Check for invalid dates*/
 
-	if((d1.year<0||d1.year>5000)||(d2.year<0||d2.year>5000))
+	if((d1.year<0||d1.year>5000)||(d2.year<0||d2.year>5000))	/*Year out of range*/
 	{
 		flag=1;
 	}
 	
-	if((d1.month<1||d1.month>12)||(d2.month<1||d2.month>12))
+	if((d1.month<1||d1.month>12)||(d2.month<1||d2.month>12))	/*Month invalid*/
 	{
 		flag=1;
 	}
 	
 	/*Check for valid days*/
 	int cd1,cd2;
+	/*Find the max valid days for given month*/
 	cd1=check_days(d1.year,d1.month);
 	cd2=check_days(d2.year,d2.month);
 
-	if((d1.day<1||d1.day>cd1)||(d2.day<1||d2.day>cd2))
+	if((d1.day<1||d1.day>cd1)||(d2.day<1||d2.day>cd2))	/*Day invalid*/
 	{
 		flag=1;
 	}
@@ -152,7 +150,13 @@ int main(int argc, char* argv[])
 		return 1;	/*Exit*/
 	}
 
+	if(dy<0)	/*Final date less than initial date?*/
+	{
+		printf("Did you enter the date correctly? Its like first earlier date, then later date.\n");
+		return 1;
+	}
 
+	/*Now the date part*/
 	/*Procedure:find diff in year -> find diff in month -> find diff in days
 
 	diff in years: find diff in year -> diff in month -> diff in days
