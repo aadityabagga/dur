@@ -199,7 +199,8 @@ int main(int argc, char* argv[])
 
 /*to find the no of days in a month*/
 
-int check_days(int year,int month)	{
+int check_days(int year,int month)	
+{
 	int leap=is_leap(year);		/*check if its leap year*/
 	
 	switch(month)
