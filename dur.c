@@ -62,7 +62,7 @@ int main(int argc, char* argv[])
 	int dy,dm,dd; /*To store the difference between the date components*/
 	int cd1,cd2;	/*To check days in months of the dates*/
 
-	/*Now program starts*/
+	/*Now program begins, ie, statements*/
 
 	if(argc != 3 ) {
                 printf("Invalid number of arguments\n");
