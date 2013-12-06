@@ -1,5 +1,5 @@
-/*A program to calculate the no of days between 2 dates in format yyyy-mm-dd
-Takes 2 command line args- initial date and final date
+/*A program to calculate the no of days between 2 dates
+Takes 2 command line args- initial date and final date in format yyyy-mm-dd
 
 Copyright (C) 2013  Aaditya Bagga  aaditya_gnulinux@zoho.com
 
@@ -20,7 +20,7 @@ Copyright (C) 2013  Aaditya Bagga  aaditya_gnulinux@zoho.com
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "stringfunc.h"
+#include <string.h>
 
 int d=0;        /*to store the output,ie, difference in days*/
 
@@ -41,6 +41,7 @@ struct date
 /*Protoypes for functions*/
 void check_months(int,int,int,int,int); 
 void diff_years(int,int);
+int check_days(int,int);	
 
 int main(int argc, char* argv[])
 {
@@ -49,50 +50,68 @@ int main(int argc, char* argv[])
                 exit(1);
         }
 	
-	/*Extract the year,month,day components from the date*/
+	/*Check the entered string*/
 
-	char *yi;
-	char *yf;
-	char *mi;
-	char *mf;
-	char *di;
-	char *df;
+	int i;
+	int flag=0;
 
-	/*Copy content of argv[1] and argv[2] from specified index values(inclusive)*/
-
-	yi=copy(*(argv+1),0,3);	
-	mi=copy(*(argv+1),5,6);
-	di=copy(*(argv+1),8,9);
-	
-	yf=copy(*(argv+2),0,3);
-        mf=copy(*(argv+2),5,6);
-        df=copy(*(argv+2),8,9);
-
-	/*Error checking for the input string*/
-
-	if(!(equals(yi,"err")||equals(mi,"err")||equals(di,"err")||equals(yf,"err")||equals(mf,"err")||equals(df,"err")))
+	for(i=0;i<10;i++)
 	{
-		printf("Invalid arguments. The arguments are like yyyy-mm-dd yyyy-mm-dd where the first is the initial date and the next is the final date.\n");
-		return 1;
+		if(i==4||i==7)
+		{
+			/*Skip for the dashes in the date*/
+			continue;
+		}
+		else
+		{
+			char c1=*(argv[1]+i);
+			char c2=*(argv[2]+i);
+			if((c1<48||c1>57)||(c2<48||c2>57))	/*Character is not an integer*/
+			{
+				flag=1;
+			}
+		}
 	}
 
-	/*insert null character at the end*/
+	if(flag==1)
+	{
+		printf("Incorrect arguments. The arguments are like yyyy-mm-dd yyyy-mm-dd where the first is the initial date and the second is the final date.\n");
+		return 1;	/*Exit*/
+	}
 
-	yi[4]='\0';
-	mi[2]='\0';
-	di[2]='\0';	
-	yf[4]='\0'; 
-        mf[2]='\0';
-	df[2]='\0';
 
+	/*Extract the year,month,day components from the date*/
+
+
+	/*(Size +1 for null char at end)*/
+	char yi[5];
+	char yf[5];
+	char mi[3];
+	char mf[3];
+	char di[3];
+	char df[3];
+
+	/*Copy the requisite characters from the input strings*/
+	strncpy (yi, argv[1], 4);
+        strncpy (mi, argv[1]+5, 2);
+        strncpy (di, argv[1]+8, 3);
+        strncpy (yf, argv[2], 4);
+        strncpy (mf, argv[2]+5, 2);
+        strncpy (df, argv[2]+8, 3);
+
+	/*insert null character at the end where required*/
+	yi[4]='\0';        
+	mi[2]='\0';        
+        yf[4]='\0';
+	mf[2]='\0';
+	
 	/*Convert the string date components to int and assign them to the structure elements*/
-
-	d1.year=to_int(yi);
-        d1.month=to_int(mi);
-        d1.day=to_int(di);
-        d2.year=to_int(yf);
-        d2.month=to_int(mf);
-	d2.day=to_int(df);
+	d1.year=atoi(yi);
+        d1.month=atoi(mi);
+        d1.day=atoi(di);
+        d2.year=atoi(yf);
+        d2.month=atoi(mf);
+	d2.day=atoi(df);
         
 	/*store difference b/w the date elements*/
         int dy,dm,dd;
@@ -103,8 +122,36 @@ int main(int argc, char* argv[])
 
 	/*Now the date part*/
 
+	
+	/*Check for invalid dates*/
 
-	/*int flag=0;	*to check for wrong dates: currently the program is non-interactive so its not being implemented yet*/
+	if((d1.year<0||d1.year>5000)||(d2.year<0||d2.year>5000))
+	{
+		flag=1;
+	}
+	
+	if((d1.month<1||d1.month>12)||(d2.month<1||d2.month>12))
+	{
+		flag=1;
+	}
+	
+	/*Check for valid days*/
+	int cd1,cd2;
+	cd1=check_days(d1.year,d1.month);
+	cd2=check_days(d2.year,d2.month);
+
+	if((d1.day<1||d1.day>cd1)||(d2.day<1||d2.day>cd2))
+	{
+		flag=1;
+	}
+
+	if(flag==1)
+	{
+		printf("Invalid date(s) entered.Valid values for the dates are-\n 0 - 5000 for year,\n 1 - 12 for month,\n 1 - max no of days in month for day.\n");
+		
+		return 1;	/*Exit*/
+	}
+
 
 	/*Procedure:find diff in year -> find diff in month -> find diff in days
 
