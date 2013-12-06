@@ -27,10 +27,10 @@ int d=0;        /*to store the output,ie, difference in days*/
 /*Make a structure for the date*/
 struct date
 {
-	unsigned int year;
-	unsigned int month;
-	unsigned int day;
-}d1,d2;
+	int year;
+	int month;
+	int day;
+}d1,d2;		/*d1 = initial date, d2 = final date*/
 
 /*Make a macro for checking leap year*/
 #define is_leap(year) (((year%4==0)&&((year%100)!=0)) || ((year%400)==0))
@@ -45,15 +45,31 @@ int check_days(int,int);
 
 int main(int argc, char* argv[])
 {
-        if(argc != 3 ) {
+        /*Declarations upfront*/
+	
+	int i;	/*Counter*/
+	int flag=0;	/*Flag to check invalid data*/
+	
+	/*To store the different parts (year,month,day) of the dates*/
+	/*(Size +1 for null char at end)*/
+	char yi[5];
+	char yf[5];
+	char mi[3];
+	char mf[3];
+	char di[3];
+	char df[3];
+        
+	int dy,dm,dd; /*To store the difference between the date components*/
+	int cd1,cd2;	/*To check days in months of the dates*/
+
+	/*Now program starts*/
+
+	if(argc != 3 ) {
                 printf("Invalid number of arguments\n");
                 exit(1);
         }
 	
 	/*Check the entered string*/
-
-	int i;
-	int flag=0;
 
 	for(i=0;i<10;i++)
 	{
@@ -81,14 +97,6 @@ int main(int argc, char* argv[])
 
 	/*Extract the year,month,day components from the date*/
 
-	/*(Size +1 for null char at end)*/
-	char yi[5];
-	char yf[5];
-	char mi[3];
-	char mf[3];
-	char di[3];
-	char df[3];
-
 	/*Copy the requisite characters from the input strings*/
 	strncpy (yi, argv[1], 4);
         strncpy (mi, argv[1]+5, 2);
@@ -112,11 +120,9 @@ int main(int argc, char* argv[])
 	d2.day=atoi(df);
         
 	/*store difference b/w the date elements*/
-        int dy,dm,dd;
 	dy=d2.year-d1.year;
         dm=d2.month-d1.month;
         dd=d2.day-d1.day;
-
 
 	/*Check for invalid dates*/
 
@@ -131,7 +137,6 @@ int main(int argc, char* argv[])
 	}
 	
 	/*Check for valid days*/
-	int cd1,cd2;
 	/*Find the max valid days for given month*/
 	cd1=check_days(d1.year,d1.month);
 	cd2=check_days(d2.year,d2.month);
@@ -194,7 +199,6 @@ int main(int argc, char* argv[])
 	/*Print the output*/
 	printf(" %d day(s)\n",d);
 	return 0;
-
 }
 
 /*to find the no of days in a month*/
