@@ -65,8 +65,21 @@ df=final date
 #		 396 day(s)
 #	b) yf>yi,mf>mi,df=di (yi is leap, feb in between)
 		./dur 2016-01-30 2017-02-30
-#		 397 day(s)
-
+#		Invalid date(s) entered.Valid values for the dates are-
+# 		0 - 5000 for year,
+# 		1 - 12 for month,
+# 		1 - max no of days in month for day.
+#b) yf>yi,mf>mi,df=di (yi is leap, feb in between)
+echo "----------------------------------"
+		./dur 2016-01-30 2017-03-30
+#		 425 day(s)
+		./dur 2016-01-30 2017-01-30
+#		 366 day(s)
+		./dur 2017-01-30 2017-02-28
+#		 29 day(s)
+		./dur 2017-02-28 2017-03-30
+#		 30 day(s)
+echo 
 
 #5.) yf>yi,mf>mi,df>di
  ./dur 2013-07-30 2014-08-31
