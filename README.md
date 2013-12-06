@@ -11,6 +11,5 @@ $ ./dur 2013-12-30 2014-01-31
 
  32 day(s)
 
-To use it, copy the dur.c and to_int.h to a folder, and compile it as
- gcc -lm -o dur dur.c
-
+To use it, download the compiled binary, or copy the dur.c to a folder, and compile it as
+ gcc -o dur dur.c
