@@ -79,9 +79,7 @@ int main(int argc, char* argv[])
 		return 1;	/*Exit*/
 	}
 
-
 	/*Extract the year,month,day components from the date*/
-
 
 	/*(Size +1 for null char at end)*/
 	char yi[5];
