@@ -1,7 +1,5 @@
 #Test cases for dur.c
-#Designed by Aaditya Bagga
 
-: '
 Terms-
 di=initial date,composed of-
 	yi=initial year
@@ -11,7 +9,7 @@ df=final date
 	yi=final year
 	mi=final month
 	di=final day(date)
-'
+
 
 ##Cases-
 #1) yf=yi,mf=mi,df=di
