@@ -1,9 +1,16 @@
 #Use cases for dur.c
-#Developed by Aaditya Bagga
 
 Some places where dur can be used-
 
-1.)To find the last upgrade time
+1.) To calculate one's physical age.
+
+dur yyyy-mm-dd $(date +%F)
+
+Here yyyy-mm-dd is date of birth, and the $(date +%F) command signifies
+the current date.
+
+
+2.) To find the last upgrade time with pacman and slackpkg package managers.
 
 a)To find the last upgrade time with pacman.
 
@@ -35,7 +42,7 @@ This can be added to ~/.bashrc and called with $ lastup
 (dur, the compiled C program, has been copied to /usr/bin)
 
 
-2.)As a reminder manager.
+3.)As a reminder manager.
 
 a)A script for it-
 

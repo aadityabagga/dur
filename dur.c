@@ -197,7 +197,7 @@ int main(int argc, char* argv[])
 	}
 
 	/*Print the output*/
-	printf(" %d day(s)\n",d);
+	printf("Day(s):\t%d\n",d);
 	return 0;
 }
 

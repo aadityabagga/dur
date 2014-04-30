@@ -14,12 +14,17 @@ It takes 2 dates as arguments-
 
 The format used for the dates is YYYY-MM-DD.
 To use the current date as one of the arguments,
-command substitution can be used, like: `date +%F`
+command substitution can be used, like: `date +%F` or $(date +%F)
+
+Output is the difference in number of days between the dates.
 .SH EXAMPLES
 .nf
 dur 2013-06-13 2014-04-30
 dur 2013-06-13 `date +%F`
 dur `date +%F` 2015-04-25
+dur 1992-02-26 $(date +%F)
 .fi
 .SH SEE ALSO
 date(1)
+.SH AUTHOR
+Aaditya Bagga (aaditya_gnulinux@zoho.com)
