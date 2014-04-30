@@ -1,0 +1,25 @@
+.\" Manpage for dur.
+.\" Contact aaditya_gnulinux@zoho.com.
+.TH man 1 "30 Apr 2014" "1.0" "dur man page"
+.SH NAME
+dur \- A program to calculate the difference between 2 dates in days
+.SH SYNOPSIS
+dur <initial-date> <final-date>
+.SH DESCRIPTION
+Dur(ation) calculates the difference between 2 dates in days.
+It takes 2 dates as arguments-
+
+1) The initial or earlier date.
+2) The final or later date.
+
+The format used for the dates is YYYY-MM-DD.
+To use the current date as one of the arguments,
+command substitution can be used, like: `date +%F`
+.SH EXAMPLES
+.nf
+dur 2013-06-13 2014-04-30
+dur 2013-06-13 `date +%F`
+dur `date +%F` 2015-04-25
+.fi
+.SH SEE ALSO
+date(1)

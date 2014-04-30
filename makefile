@@ -5,9 +5,9 @@ SHELL=/bin/bash
 DESTDIR=
 bindir=/usr/bin
 
-compile: dur.c
+make: dur.c
 	$(CC) dur.c -o dur $(CFLAGS)
 
-install: dur
+make install: dur
 	$(INSTALL) -d $(DESTDIR)$(bindir)
 	$(INSTALL) -m755 dur $(DESTDIR)$(bindir)
