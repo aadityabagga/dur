@@ -1,18 +1,22 @@
-A C program to find the difference between 2 dates.
+Dur(ation) is a C program to find the difference between 2 dates.
 
-Takes input in the form of 2 dates, initial-date final-date,
+It takes input in the form of 2 dates, initial-date and final-date,
 
-in the format yyyy-mm-dd.
+in the format yyyy-mm-dd yyyy-mm-dd
 
 Output is the number of days difference between the dates.
 
 eg,
 $ dur 2013-12-30 2014-01-31
 
- 32 day(s)
+Day(s): 32
 
-To use it, download the compiled binary, or copy the dur.c and makefile to a folder, and do:
+# Installation
+
+To use it, download the source, and run the compiled binary,
+or to compile and install it, download the source, and run :
 
 make
 
 sudo make install
+
