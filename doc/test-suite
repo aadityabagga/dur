@@ -13,7 +13,7 @@ df=final date
 
 '
 
-##Cases-
+#Cases-
 #1) yf=yi,mf=mi,df=di
  ./dur 2013-12-30 2013-12-30
 # 0 day(s)
