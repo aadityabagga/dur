@@ -65,7 +65,7 @@ int main(int argc, char* argv[])
 	/*Now the program begins, ie, statements*/
 
 	if(argc != 3 ) {
-                printf("Invalid number of arguments\n");
+                printf("Invalid number of arguments. See the dur man page for more info.\n");
                 exit(1);
         }
 	
