@@ -2,15 +2,8 @@
 
 Some places where dur can be used-
 
-1.) To calculate one's physical age.
 
-dur yyyy-mm-dd $(date +%F)
-
-Here yyyy-mm-dd is date of birth, and the $(date +%F) command signifies
-the current date.
-
-
-2.) To find the last upgrade time with pacman and slackpkg package managers.
+1.) To find the last upgrade time with pacman and slackpkg package managers.
 
 	a)To find the last upgrade time with pacman.
 
@@ -42,7 +35,7 @@ the current date.
 	(dur, the compiled C program, has been copied to /usr/bin)
 
 
-3.)As a reminder manager.
+2.) As a reminder manager.
 
 	a)A script for it-
 
@@ -74,3 +67,11 @@ the current date.
 
 	Here Exam is the name of the event, and 2013-12-08 is the date of the event, ie exam.
 	This updates itself every hour, or 3600 seconds.
+
+
+3.) To calculate one's physical age.
+
+dur yyyy-mm-dd $(date +%F)
+
+Here yyyy-mm-dd is date of birth, and the $(date +%F) command signifies
+the current date.
