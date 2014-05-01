@@ -1,4 +1,6 @@
-#Test cases for dur.c
+# Test cases for dur.c
+
+: '
 
 Terms-
 di=initial date,composed of-
@@ -10,6 +12,7 @@ df=final date
 	mi=final month
 	di=final day(date)
 
+'
 
 ##Cases-
 #1) yf=yi,mf=mi,df=di
