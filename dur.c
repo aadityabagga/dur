@@ -18,7 +18,6 @@ Copyright(C) 2013-2014 Aaditya Bagga aaditya_gnulinux@zoho.com
 */
 
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -33,7 +32,7 @@ struct date
 }d1,d2;		/*d1 = initial date, d2 = final date*/
 
 /*Make a macro for checking leap year*/
-#define is_leap(year) (((year%4==0)&&((year%100)!=0)) || ((year%400)==0))
+#define is_leap(year) (((year%4 == 0) && ((year%100) != 0)) || ((year%400)==0))
 
 /*Make a macro for checking elapsed days*/
 #define check_elapsed_days(days) (days)
@@ -126,12 +125,13 @@ int main(int argc, char* argv[])
 
 	/*Check for invalid dates*/
 
-	if((d1.year<1||d1.year>5000)||(d2.year<0||d2.year>5000))	/*Year out of range*/
+	/* Minimum year changed to 1 instead of 0; suggested by maandree (https://github.com/maandree) */
+	if((d1.year < 1 || d1.year > 5000)||(d2.year < 1 || d2.year > 5000))	/*Year out of range*/
 	{
 		flag=1;
 	}
 	
-	if((d1.month<1||d1.month>12)||(d2.month<1||d2.month>12))	/*Month invalid*/
+	if((d1.month < 1 || d1.month > 12) || (d2.month < 1 || d2.month > 12))	/*Month invalid*/
 	{
 		flag=1;
 	}
@@ -141,21 +141,21 @@ int main(int argc, char* argv[])
 	cd1=check_days(d1.year,d1.month);
 	cd2=check_days(d2.year,d2.month);
 
-	if((d1.day<1||d1.day>cd1)||(d2.day<1||d2.day>cd2))	/*Day invalid*/
+	if((d1.day < 1 || d1.day > cd1) || (d2.day < 1 || d2.day > cd2))	/*Day invalid*/
 	{
 		flag=1;
 	}
 
-	if(flag==1)
+	if(flag == 1)
 	{
 		printf("Invalid date(s) entered. Valid values for the dates are-\n 1 - 5000 for year,\n 1 - 12 for month,\n 1 - max no of days in month for day.\n");
 		
 		return 1;	/*Exit*/
 	}
 
-	if(dy<0)	/*Final date less than initial date?*/
+	if(dy < 0)	/*Final date less than initial date?*/
 	{
-		printf("Did you enter the date correctly? Its like first earlier date, then later date.\n");
+		printf("Did you enter the date correctly? The format is first earlier date, then later date.\n");
 		return 1;
 	}
 
