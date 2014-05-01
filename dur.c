@@ -1,7 +1,7 @@
 /*A program to calculate the no of days between 2 dates
 Takes 2 command line args- initial date and final date in format yyyy-mm-dd
 
-Copyright (C) 2013  Aaditya Bagga  aaditya_gnulinux@zoho.com
+Copyright(C) 2013-2014 Aaditya Bagga aaditya_gnulinux@zoho.com
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -126,7 +126,7 @@ int main(int argc, char* argv[])
 
 	/*Check for invalid dates*/
 
-	if((d1.year<0||d1.year>5000)||(d2.year<0||d2.year>5000))	/*Year out of range*/
+	if((d1.year<1||d1.year>5000)||(d2.year<0||d2.year>5000))	/*Year out of range*/
 	{
 		flag=1;
 	}
@@ -148,7 +148,7 @@ int main(int argc, char* argv[])
 
 	if(flag==1)
 	{
-		printf("Invalid date(s) entered.Valid values for the dates are-\n 0 - 5000 for year,\n 1 - 12 for month,\n 1 - max no of days in month for day.\n");
+		printf("Invalid date(s) entered. Valid values for the dates are-\n 1 - 5000 for year,\n 1 - 12 for month,\n 1 - max no of days in month for day.\n");
 		
 		return 1;	/*Exit*/
 	}
