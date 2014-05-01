@@ -22,3 +22,10 @@ make
 
 sudo make install
 
+For Arch Linux users, its also available in the AUR:
+https://aur.archlinux.org/packages/dur/
+
+# Using
+
+For some possible ways in which you can use the program, see the use-cases file inside the doc folder:
+https://github.com/aadityabagga/dur/blob/master/doc/use-cases
