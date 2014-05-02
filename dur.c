@@ -1,7 +1,7 @@
 /*A program to calculate the no of days between 2 dates
 Takes 2 command line args- initial date and final date in format yyyy-mm-dd
 
-Copyright(C) 2013-2014 Aaditya Bagga aaditya_gnulinux@zoho.com
+Copyright(C) 2013-2014 Aaditya Bagga (aaditya_gnulinux@zoho.com)
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ struct date
 	int year;
 	int month;
 	int day;
-}d1,d2;		/*d1 = initial date, d2 = final date*/
+} d1,d2;		/*d1 = initial date, d2 = final date*/
 
 /*Make a macro for checking leap year*/
 #define is_leap(year) (((year%4 == 0) && ((year%100) != 0)) || ((year%400)==0))
@@ -64,7 +64,7 @@ int main(int argc, char* argv[])
 	/*Now the program begins, ie, statements*/
 
 	if(argc != 3 ) {
-                printf("Invalid number of arguments. See the dur man page for more info.\n");
+                printf("Invalid number of arguments. See the man page for more info.\n");
                 exit(1);
         }
 	
