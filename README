@@ -34,6 +34,6 @@ https://github.com/aadityabagga/dur/blob/master/doc/use-cases
 
 For really large differences in date, example, 1901-01-01 to 2013-11-28 (41239 days),
 the output maybe incorrect by a day or two, as the program was not meant for such complete accuracy.
-(error % = - 0.00005 approx)
+(error % = 0.005 approx)
 
 However, effort was made to reduce the errors to a minumum, and it should work correctly for most cases.
