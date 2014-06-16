@@ -15,7 +15,7 @@ Day(s): 32
 
 # Installation
 
-To use it, download the source, and run the compiled binary,
+To use it, run the compiled binary for your architecture from the bin folder (if available),
 or to compile and install it, download the source, and run :
 
 make
