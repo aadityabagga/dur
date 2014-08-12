@@ -10,7 +10,9 @@ Output is the number of days difference between the dates.
 
 For example,
 
+<pre>
 dur 2013-12-30 2014-01-31
+</pre>
 
 Day(s): 32
 
