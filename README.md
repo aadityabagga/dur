@@ -1,4 +1,4 @@
-Dur(ation) is a C program to find the difference between 2 dates.
+dur (short for duration) is a C program to find the difference between 2 dates.
 
 # Usage
 
@@ -18,9 +18,11 @@ Day(s): 32
 To use it, run the compiled binary for your architecture from the bin folder (if available),
 or to compile and install it, download the source, and run :
 
-make
+(as root)
+ # make
 
-sudo make install
+(or)
+ $ sudo make install
 
 For Arch Linux users, its also available in the AUR:
 https://aur.archlinux.org/packages/dur/
