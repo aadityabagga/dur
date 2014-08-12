@@ -10,16 +10,16 @@ bindir = /usr/bin
 mandir = /usr/man/man1
 docdir = /usr/doc/$(NAME)
 
-make: dur.c
-	$(CC) dur.c -o dur $(CFLAGS)
+make: src/dur.c
+	$(CC) src/dur.c -o bin/dur $(CFLAGS)
 
-install: dur
+install: bin/dur
 	$(INSTALL) -d $(DESTDIR)$(bindir)
 	$(INSTALL) -d $(DESTDIR)$(mandir)
 	$(INSTALL) -d $(DESTDIR)$(docdir)
 	$(INSTALL) -m755 dur $(DESTDIR)$(bindir)
 	$(INSTALL) -m644 man/dur.1 $(DESTDIR)$(mandir)
-	$(INSTALL) -m644 doc/use-cases $(DESTDIR)$(docdir)
+	$(INSTALL) -m644 doc/use-cases.txt $(DESTDIR)$(docdir)
 	$(INSTALL) -m644 README.md $(DESTDIR)$(docdir)
 	$(INSTALL) -m644 COPYING $(DESTDIR)$(docdir)
 
