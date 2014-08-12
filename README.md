@@ -11,6 +11,7 @@ Output is the number of days difference between the dates.
 For example,
 
 dur 2013-12-30 2014-01-31
+
 Day(s): 32
 
 # Installation
