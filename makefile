@@ -1,5 +1,5 @@
 NAME = dur
-VER = 1.1
+VER = 1.1.1
 CC = gcc
 CFLAGS = -ansi -pedantic -Wall -Wextra -Wconversion -Wstrict-overflow -Wformat=2
 INSTALL = /usr/bin/install

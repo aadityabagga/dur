@@ -14,7 +14,7 @@ For example,
 dur 2013-12-30 2014-01-31
 </pre>
 
-Day(s): 32
+32 days
 
 # Installation
 
