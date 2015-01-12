@@ -17,13 +17,13 @@ install: bin/dur
 	$(INSTALL) -d $(DESTDIR)$(bindir)
 	$(INSTALL) -d $(DESTDIR)$(mandir)
 	$(INSTALL) -d $(DESTDIR)$(docdir)
-	$(INSTALL) -m755 dur $(DESTDIR)$(bindir)
+	$(INSTALL) -m755 bin/dur $(DESTDIR)$(bindir)
 	$(INSTALL) -m644 man/dur.1 $(DESTDIR)$(mandir)
 	$(INSTALL) -m644 doc/use-cases.txt $(DESTDIR)$(docdir)
 	$(INSTALL) -m644 README.md $(DESTDIR)$(docdir)
 	$(INSTALL) -m644 COPYING $(DESTDIR)$(docdir)
 
-remove:
+uninstall:
 	$(rm) $(DESTDIR)$(bindir)/$(NAME)
 	$(rm) $(DESTDIR)$(mandir)/$(NAME).1
 	$(rm) -r $(DESTDIR)$(docdir)/$(NAME)
